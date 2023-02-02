@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/user/view/login_screen.dart';
+
+import 'common/component/custom_form_field.dart';
 
 void main() {
   runApp(
@@ -12,12 +15,12 @@ class _App extends StatelessWidget { //_:private
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: "NotoSans",
+      ),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
+      home:LoginScreen()
 
-        ),
-      )
     );
   }
 }
