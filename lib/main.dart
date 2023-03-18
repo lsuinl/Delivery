@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/common/view/root_tab.dart';
 import 'package:restaurant/common/view/splash_screen.dart';
 import 'package:restaurant/user/view/login_screen.dart';
 
@@ -20,7 +21,7 @@ class _App extends StatelessWidget { //_:private
         fontFamily: "NotoSans",
       ),
       debugShowCheckedModeBanner: false,
-      home:SplashScreen()
+      home:RootTab()
     );
   }
 }

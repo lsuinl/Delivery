@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:restaurant/common/const/colors.dart';
 import 'package:restaurant/common/const/data.dart';
