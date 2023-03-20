@@ -24,9 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final dio = Dio();
-    final emulatorIp='10.0.2.2:3000'; //에뮬레이터의 로컬호스트
-    final simulatorIp='127.0.0.1:3000';
-    final ip=Platform.isIOS ? simulatorIp:emulatorIp;
     return DefaultLayout(
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -90,14 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                     onPressed: () async{
-                      final refreshToken=''; //토큰담기
-                      final resp = await dio.post('http://$ip/auth/token',
-                        options: Options(
-                            headers: {
-                              'authorization':'Bearer $refreshToken',
-                            }
-                        ),
-                      );
                     },
                     style: TextButton.styleFrom(
                         primary: Colors.black
