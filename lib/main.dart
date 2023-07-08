@@ -5,6 +5,9 @@ import 'package:restaurant/user/view/login_screen.dart';
 
 import 'common/component/custom_form_field.dart';
 
+
+//test@codefactory.ai
+//testtest
 void main() {
   runApp(
   _App()
@@ -21,7 +24,7 @@ class _App extends StatelessWidget { //_:private
         fontFamily: "NotoSans",
       ),
       debugShowCheckedModeBanner: false,
-      home:RootTab()
+      home:SplashScreen()
     );
   }
 }

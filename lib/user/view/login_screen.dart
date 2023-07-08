@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -74,7 +73,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     final accessToken = resp.data['accessToken'];
                     await storage.write(key: REFRESH_TOKEN_KEY, value: refreshToken);
                     await storage.write(key: ACCESS_TOKEN_KEY, value: accessToken);
-
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (_)=>RootTab()
                       ),
