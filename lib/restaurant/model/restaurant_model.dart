@@ -28,7 +28,7 @@ class RestaurantModel {
     required this.deliveryTime,
     required this.deliveryFee,
   });
-
+//json에대한 자동 mapping을 위함 == factory
   factory RestaurantModel.fromJson({
     required Map<String, dynamic> json,
   }) {
