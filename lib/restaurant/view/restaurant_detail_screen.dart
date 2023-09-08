@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant/common/layout/default_layout.dart';
 import 'package:restaurant/product/component/product_card.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
-import 'package:restaurant/restaurant/model/restautant_detail_model.dart';
+import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 
 import '../../common/const/data.dart';
 
@@ -34,7 +34,7 @@ class RestaurantDetailScreen extends StatelessWidget {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
               }
-              final item = RestaurantDetailModel.fromJson(json: snapshot.data!);
+              final item = RestaurantDetailModel.fromJson(snapshot.data!);
               return CustomScrollView(
                 slivers: [
                   renderTop(model: item),

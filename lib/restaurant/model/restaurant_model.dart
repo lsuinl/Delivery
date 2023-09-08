@@ -1,3 +1,5 @@
+import 'package:restaurant/common/utils/data_utils.dart';
+
 import '../../common/const/data.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'restaurant_model.g.dart';
@@ -11,9 +13,7 @@ enum RestaurantPriceRange {
 class RestaurantModel {
   final String id;
   final String name;
-  @JsonKey(
-    fromJson: pathToUrl
-  )
+  @JsonKey(fromJson: DataUtils.pathToUrl)
   final String thumbUrl;
   final List<String> tags;
   final RestaurantPriceRange priceRange;
@@ -39,10 +39,6 @@ class RestaurantModel {
 
   Map<String,dynamic> toJson() => _$RestaurantModelToJson(this);
 
-  //무조건 static여야함
-  static pathToUrl(String value){
-    return "http://$ip$value}";
-  }
 //json에대한 자동 mapping을 위함 == factory
 //   factory RestaurantModel.fromJson({
 //     required Map<String, dynamic> json,

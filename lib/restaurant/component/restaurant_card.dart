@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/common/const/colors.dart';
 import 'package:restaurant/restaurant/model/restaurant_model.dart';
-import 'package:restaurant/restaurant/model/restautant_detail_model.dart';
+import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 
 class RestaurantCard extends StatelessWidget {
   //이미지
