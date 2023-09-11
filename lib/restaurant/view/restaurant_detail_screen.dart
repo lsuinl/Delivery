@@ -4,6 +4,7 @@ import 'package:restaurant/common/layout/default_layout.dart';
 import 'package:restaurant/product/component/product_card.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
+import 'package:restaurant/restaurant/repository/restaurant_respository.dart';
 
 import '../../common/const/data.dart';
 
@@ -12,34 +13,30 @@ class RestaurantDetailScreen extends StatelessWidget {
 
   const RestaurantDetailScreen({required this.id, Key? key}) : super(key: key);
 
-  Future<Map<String, dynamic>> getRestaurantDetail() async {
+  Future<RestaurantDetailModel> getRestaurantDetail() async {
     final dio = Dio();
-    final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
-    final resp = await dio.get('http://$ip/restaurant/$id',
-        options: Options(headers: {
-          'authorization': 'Bearer $accessToken',
-        }));
 
-    return resp.data;
+    final repository = RestaurantRespository(dio, baseUrl: 'http://$ip/restaurant');
+
+    return repository.getRestaurantDetail(id: id);
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
         title: "불타는 떡볶이",
-        child: FutureBuilder<Map<String, dynamic>>(
+        child: FutureBuilder<RestaurantDetailModel>(
             future: getRestaurantDetail(),
-            builder: (_, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-              //  print(snapshot.data);
+            builder: (_, AsyncSnapshot<RestaurantDetailModel> snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
               }
-              final item = RestaurantDetailModel.fromJson(snapshot.data!);
+
               return CustomScrollView(
                 slivers: [
-                  renderTop(model: item),
+                  renderTop(model: snapshot.data!),
                   renderLabel(),
-                  renderProduct(products: item.products)
+                  renderProduct(products: snapshot.data!.products)
                 ],
               );
             }));
