@@ -45,6 +45,7 @@ class CustomInterceptor extends Interceptor {
     @override
     void onResponse(Response response, ResponseInterceptorHandler handler) {
       // TODO: implement onResponse
+      print("[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}");
       super.onResponse(response, handler);
     }
 
