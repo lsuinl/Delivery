@@ -8,5 +8,3 @@ const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 final emulatorIp='10.0.2.2:3000'; //에뮬레이터의 로컬호스트
 final simulatorIp='127.0.0.1:3000';
 final ip=Platform.isIOS ? simulatorIp:emulatorIp;
-
-final storage = FlutterSecureStorage();

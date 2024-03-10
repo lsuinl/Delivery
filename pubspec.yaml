@@ -37,10 +37,13 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   dio: ^5.3.2
+  riverpod: ^2.5.0
+  riverpod_annotation: ^2.3.4
   flutter_secure_storage: ^8.0.0
   json_annotation: ^4.8.0
   retrofit: '>=4.0.0 <5.0.0'
   logger: any
+  flutter_riverpod: ^2.4.10
 
 
 dev_dependencies:

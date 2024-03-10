@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant/common/view/root_tab.dart';
 import 'package:restaurant/common/view/splash_screen.dart';
 import 'package:restaurant/user/view/login_screen.dart';
@@ -10,7 +11,9 @@ import 'common/component/custom_form_field.dart';
 //testtest
 void main() {
   runApp(
-  _App()
+    ProviderScope(
+      child: _App()
+    )
   );
 }
 

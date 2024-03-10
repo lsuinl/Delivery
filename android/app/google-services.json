@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1064383213345",
+    "project_id": "future-medley-361006",
+    "storage_bucket": "future-medley-361006.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064383213345:android:b94c9516c1b37a6b711860",
+        "android_client_info": {
+          "package_name": "com.example.restaurant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZVwveFHpUSIDdSp3zksjNFZ7Kr_56A2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
