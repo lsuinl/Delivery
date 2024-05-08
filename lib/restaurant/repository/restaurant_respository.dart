@@ -1,10 +1,20 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:restaurant/common/dio/dio.dart';
 import 'package:restaurant/common/model/cursor_pagination_model.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../common/const/data.dart';
+
 part 'restaurant_respository.g.dart';
 
+final restaurantRepositoryProvider = Provider(
+    (ref){
+      final dio = ref.watch(dioProvider);
+      final repository = RestaurantRespository(dio, baseUrl: 'http://$ip/restaurant');
+    }
+);
 
 @RestApi()
 abstract class RestaurantRespository{
