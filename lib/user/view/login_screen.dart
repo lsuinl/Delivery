@@ -84,7 +84,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: PRIMARY_COLOR
+                      backgroundColor: PRIMARY_COLOR
                   ),
                   child: Text('로그인'),
                 ),
@@ -92,7 +92,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onPressed: () async{
                     },
                     style: TextButton.styleFrom(
-                        primary: Colors.black
+                        foregroundColor: Colors.black
                     ),
                     child: Text('회원가입')
                 )

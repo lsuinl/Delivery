@@ -5,27 +5,31 @@ import 'package:restaurant/common/dio/dio.dart';
 import 'package:restaurant/common/model/cursor_pagination_model.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
 import 'package:restaurant/restaurant/model/restaurant_model.dart';
+import 'package:restaurant/restaurant/provider/restaurant_provider.dart';
 import 'package:restaurant/restaurant/repository/restaurant_respository.dart';
 import 'package:restaurant/restaurant/view/restaurant_detail_screen.dart';
-
+import 'package:flutter/material.dart';
 import '../../common/const/data.dart';
+
 
 class RestaurantScreen extends ConsumerWidget {
   const RestaurantScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-        child: Center(
-      child: Padding(
+    //어떤 순간에서든 restaurantProvider이 생성됨. (필요가없어지면 알아서 삭제)
+    final data = ref.watch(restaurantProvider);
+
+    //잘못된 예외처리이지만, 현재상황으로서의 최선으로 코딩 진행,추후 수정 예정
+    if(data.length==0){
+      return Center(
+       child: CircularProgressIndicator(),
+      );
+    }
+
+    return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: FutureBuilder<CursorPagination<RestaurantModel>>(
-            future: ref.watch(restaurantRepositoryProvider).paginate(),
-            builder: (context, AsyncSnapshot<CursorPagination<RestaurantModel>> snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
-              }
-              return ListView.separated(
+          child: ListView.separated(
                 itemCount: snapshot.data!.data.length,
                 itemBuilder: (_, index) {
                   final pItem = snapshot.data!.data[index];
@@ -38,9 +42,7 @@ class RestaurantScreen extends ConsumerWidget {
                 separatorBuilder: (_, index) {
                   return SizedBox(height: 16.0);
                 },
-              );
-            },
-          )),
-    ));
+          )
+    );
   }
 }
