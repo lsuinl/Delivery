@@ -1,14 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:restaurant/common/dio/dio.dart';
 import 'package:restaurant/common/layout/default_layout.dart';
 import 'package:restaurant/product/component/product_card.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 import 'package:restaurant/restaurant/repository/restaurant_respository.dart';
-
-import '../../common/const/data.dart';
 
 class RestaurantDetailScreen extends ConsumerWidget {
   final String id;
@@ -17,12 +13,11 @@ class RestaurantDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(restaurantRepositoryProvider);
     return DefaultLayout(
         title: "불타는 떡볶이",
         child: FutureBuilder<RestaurantDetailModel>(
-            future: ref.watch(restaurantRepositoryProvider).getRestaurantDetail(
-          id: id,
-        ),
+            future: data.paginate(),
             builder: (_, AsyncSnapshot<RestaurantDetailModel> snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());

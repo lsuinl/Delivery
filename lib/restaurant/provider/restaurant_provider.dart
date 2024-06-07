@@ -1,5 +1,4 @@
 import 'package:restaurant/restaurant/model/restaurant_model.dart';
-import 'package:restaurant/restaurant/model/restaurant_model.dart';
 import 'package:restaurant/restaurant/repository/restaurant_respository.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -12,9 +11,9 @@ final restaurantProvider = StateNotifierProvider
 
       return notifier;
     }
-)
+);
 class RestaurantStateNotifier extends StateNotifier<List<RestaurantModel>>{
-  final RestaurantRepository repository;
+  final RestaurantRespository repository;
 
   RestaurantStateNotifier({
     required this.repository,

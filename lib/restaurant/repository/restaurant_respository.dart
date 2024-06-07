@@ -4,9 +4,7 @@ import 'package:restaurant/common/dio/dio.dart';
 import 'package:restaurant/common/model/cursor_pagination_model.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 import 'package:retrofit/retrofit.dart';
-
 import '../../common/const/data.dart';
-
 part 'restaurant_respository.g.dart';
 
 final restaurantRepositoryProvider = Provider(
@@ -17,6 +15,7 @@ final restaurantRepositoryProvider = Provider(
 );
 
 @RestApi()
+
 abstract class RestaurantRespository{
   //http://$ip/restaurant
   factory RestaurantRespository(Dio dio, {String baseUrl})
