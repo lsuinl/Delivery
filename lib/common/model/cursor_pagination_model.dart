@@ -55,7 +55,7 @@ class CursorPaginationMeta{
 //새로고침기능(이미 데이터가 있는 상태에서 새로고침을 하기 때문에
 //아까와 같은 Base대신 CursorPagination을 extends함
 //물론 CursorPagination도 base를 extend하기때문에 둘다 만족함!
-class CursorPaginationRefetching extends CursorPagination {
+class CursorPaginationRefetching<T> extends CursorPagination<T> {
   CursorPaginationRefetching({
     required super.meta,
     required super.data,
@@ -63,7 +63,7 @@ class CursorPaginationRefetching extends CursorPagination {
 }
 
 //리스트의 맨 아래로 내려서, 추가 데이터 요청
-class CursorPaginationFetchingMore extends CursorPagination{
+class CursorPaginationFetchingMore<T> extends CursorPagination<T>{
   CursorPaginationFetchingMore({
     required super.meta,
     required super.data,
