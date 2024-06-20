@@ -28,7 +28,7 @@ abstract class RestaurantRespository{
   })
   Future<CursorPagination<RestaurantDetailModel>> paginate({
     //const왜안돼
-   @Queries() PaginationParams? paginationParams = const PaginationParams(),
+   @Queries() PaginationParams? paginationParams = PaginationParams(),
 });
 
   @GET('/{id}')
