@@ -38,5 +38,17 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase>{
     //3. CurpaginationError - 에러
     //4. CurpaginationRefetching - 첫번째 데이터부터 다시 데이터 가져오기
     //5. CurPaginationFetchMore - 추가 데이터 paginate해오라는 요청을 받은 경우
+
+    //q바로 반환하는 상황
+    //hasmore= false(기존 상태에서 이미 다음데이터가 없다는 것을 받은 경우)
+    //로딩중- fetchMore : true
+  //        fetchMore가 아닐때
+    if(state is CursorPagination && !forceRefetch){
+        final pStatge = state as CursorPagination;//강제형변환(자동완성을 위하여)
+        if(!pStatge.meta.hasMore){
+          return;
+        }
+    }
+
   }
 }
