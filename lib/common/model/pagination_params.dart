@@ -12,6 +12,17 @@ class PaginationParams{
     this.count,
 });
 
+  //특정값만 바꾸고 싶을때 활용
+  PaginationParams copyWith({
+    String? after,
+    int? count,
+}){
+    return PaginationParams(
+      after: after ?? this.after,
+      count: count?? this.count,
+    );
+  }
+
   factory PaginationParams.fromJson(Map<String,dynamic> json)
   => _$PaginationParamsFromJson(json);
 
