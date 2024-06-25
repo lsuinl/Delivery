@@ -70,13 +70,30 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase>{
       final pState = state as CursorPagination;
 
       //이미 들고있는 속성들을 유지한채로 클래스만 변경.
-      state = CursorPaginationFetchingMore(meta: pState.meta, data: pState.data);
+      state = CursorPaginationFetchingMore(
+          meta: pState.meta,
+          data: pState.data
+      );
 
       //after넣어주기
       paginationParams = paginationParams.copyWith(
-        after: pState.data.last.id,
-
+        after: pState.data.last.id;
       );
     }
+    final resp = await repository.paginate(
+      paginationParams: paginationParams,
+    );
+
+    if(state is CursorPaginationFetchingMore){
+      final pState = state as CursorPaginationFetchingMore;
+    }
+
+    //기존에 있던 데이터 + 새로 들어온 데이터를 합쳐서 저장.
+    state = resp.copyWith(
+      data: [
+        ...pState.data,
+        ...resp.data,
+      ],
+    );
   }
 }
