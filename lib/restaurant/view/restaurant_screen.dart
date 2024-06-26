@@ -57,8 +57,15 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView.separated(
             controller: controller,
-                itemCount: cp.data.length,
+                itemCount: cp.data.length+1,
                 itemBuilder: (_, index) {
+                if(index==cp.data.length){
+                  return Padding(padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: Center(
+                    child:data is CursorPaginationFetchingMore?
+                      CircularProgressIndicator():Text("마지막 데이터입니다 ㅠㅠ")
+                  ));
+                }
                   final pItem = cp.data[index];
                   return GestureDetector(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
