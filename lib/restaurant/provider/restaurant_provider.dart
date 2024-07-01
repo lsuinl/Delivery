@@ -4,6 +4,17 @@ import 'package:restaurant/restaurant/model/restaurant_model.dart';
 import 'package:restaurant/restaurant/repository/restaurant_respository.dart';
 import 'package:riverpod/riverpod.dart';
 
+final restaurantDetailProvider =
+Provider.family<RestaurantModel?,String>((ref, id) {
+ final state = ref.watch(restaurantProvider);
+
+ if(state is! CursorPagination<RestaurantModel>){ //데이터가 없음
+   return null;
+ }
+
+ return state.data.firstWhere((element) => element.id==id);
+});
+
 final restaurantProvider = StateNotifierProvider
 <RestaurantStateNotifier, CursorPaginationBase>(
     (ref){
