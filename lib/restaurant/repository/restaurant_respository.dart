@@ -12,11 +12,12 @@ final restaurantRepositoryProvider = Provider(
     (ref){
       final dio = ref.watch(dioProvider);
       final repository = RestaurantRespository(dio, baseUrl: 'http://$ip/restaurant');
+
+      return repository;
     }
 );
 
 @RestApi()
-
 abstract class RestaurantRespository{
   //http://$ip/restaurant
   factory RestaurantRespository(Dio dio, {String baseUrl})
@@ -28,7 +29,7 @@ abstract class RestaurantRespository{
   })
   Future<CursorPagination<RestaurantDetailModel>> paginate({
     //const왜안돼
-   @Queries() PaginationParams? paginationParams = PaginationParams(),
+   @Queries() PaginationParams? paginationParams = const PaginationParams(),
 });
 
   @GET('/{id}')
