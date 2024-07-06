@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant/common/layout/default_layout.dart';
 import 'package:restaurant/product/component/product_card.dart';
+import 'package:restaurant/rating/component/rating_card.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 import 'package:restaurant/restaurant/model/restaurant_model.dart';
@@ -42,7 +43,21 @@ Widget build(BuildContext context){
             renderTop(model: state),
             if(state is! RestaurantDetailModel)renderLoading(),
             if(state is RestaurantDetailModel)renderLabel(),
-            if(state is RestaurantDetailModel)renderProduct(products: state.products)
+            if(state is RestaurantDetailModel)renderProduct(products: state.products),
+            SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+            sliver:
+            SliverToBoxAdapter(
+              child:RatingCard(
+                  avatarImage: AssetImage(
+                    'asset/img/logo.codefactory_logo.png'
+                  ),
+                  images: [],
+                  rating: 4,
+                  email: 'suin.ai',
+                  content: '맛있습니다.'
+              )
+            ))
           ],
         )
             );
