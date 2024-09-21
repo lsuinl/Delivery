@@ -9,6 +9,7 @@ import 'package:restaurant/restaurant/component/restaurant_card.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 import 'package:restaurant/restaurant/model/restaurant_model.dart';
 import 'package:restaurant/restaurant/provider/restaurant_provider.dart';
+import 'package:restaurant/restaurant/provider/restaurant_rating_provider.dart';
 import 'package:restaurant/restaurant/repository/restaurant_respository.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -33,6 +34,9 @@ class _RestaurantDetailScreenState extends ConsumerState<RestaurantDetailScreen>
   @override
 Widget build(BuildContext context){
     final state = ref.watch(restaurantDetailProvider(widget.id));
+    final retingsState = ref.watch(RestaurantRatingProvider(widget.id));
+
+    print(retingsState);
     if(state==null){
       return DefaultLayout(child: Center(child:CircularProgressIndicator()));
     }

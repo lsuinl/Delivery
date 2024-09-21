@@ -5,10 +5,11 @@ import "package:restaurant/common/repository/base_pagination_repository.dart";
 import "package:restaurant/rating/model/rating_model.dart";
 import "package:retrofit/retrofit.dart";
 
+import "../../common/const/data.dart";
 import "../../common/model/cursor_pagination_model.dart";
 import "../../common/model/pagination_params.dart";
 
-part 'restaurant_rating_repository.g.dart';
+part 'restaurant_rating_respository.g.dart';
 
 final RestaurantRatingRespositoryProvider = Provider.family<
 RestaurantRatingRespository,
@@ -16,8 +17,9 @@ String
 >((ref,id){
   final dio = ref.watch(dioProvider);
   
-  return RestaurantRatingRespository((dio, baseUrl: 'http://$ip/restaurant/$id/rating'));
-})
+  return RestaurantRatingRespository(dio, baseUrl: 'http://$ip/restaurant/$id/rating');
+}
+);
 
 //http://ip/restaurant/:rid/rating
 @RestApi()

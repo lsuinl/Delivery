@@ -16,7 +16,9 @@ U extends IBasePaginationRepository<T>
   PaginationProvider({
    required this.repository,
 }):
-      super(CursorPaginationLoading());
+      super(CursorPaginationLoading()){
+    paginate();
+  }
 
 
   Future<void> paginate({
@@ -109,29 +111,10 @@ U extends IBasePaginationRepository<T>
           state = resp;
         }
       }
-    } catch (e) {
+    } catch (e,stack) {
+      print(e);
+      print(stack);
       state = CursorPaginationError(message: "데이터를 가져오지 못했습니다.");
     }
-  }
-  void getDetail({
-    required String id,
-  }) async {
-    //만약 아직 데이터가 하나도 없다면(CursorPagination이 아니라면)
-    //데이터를 가져오는 시도를 한다.
-    if (state is! CursorPagination) {
-      await this.paginate();
-    }
-
-    //state 가 CursorPagination이 아닐때 그냥 리던하기
-    if (state is! CursorPagination)
-      return;
-
-    final pState = state as CursorPagination;
-
-    final resp = await repository.getRestaurantDetail(id: id);
-    state = pState.copyWith(
-        data: pState.data.map<RestaurantModel>
-          ((e) => e.id == id ? resp : e).toList()
-    );
   }
 }
