@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:restaurant/common/component/pagination_list_view.dart';
 import 'package:restaurant/common/model/cursor_pagination_model.dart';
 import 'package:restaurant/common/utils/pagination_utils.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
@@ -35,6 +36,16 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return PaginationListView(
+        provider: restaurantProvider,
+        itemBuilder:<RestaaurantModel>(_,index,model){
+      return GestureDetector(
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => RestaurantDetailScreen(id: model.id))),
+        child: RestaurantCard.fromModel(model: model),
+      );
+    });
+
     //어떤 순간에서든 restaurantProvider이 생성됨. (필요가없어지면 알아서 삭제)
     final data = ref.watch(restaurantProvider);
 
