@@ -15,7 +15,18 @@ class ProductCard extends StatelessWidget {
     required this.price,
     Key? key}) : super(key: key);
 
-  factory ProductCard.fromModel({
+  factory ProductCard.fromProductModel({
+  required RestaurantProductModel model,
+  }){
+  return ProductCard(image: Image.asset(
+  model.imgUrl,
+  width: 110,
+  height: 110,
+  fit: BoxFit.cover,
+  ), name: model.name, detail: model.detail, price: model.price);
+}
+
+  factory ProductCard.fromRestaurantProductModel({
     required RestaurantProductModel model,
 }){
     return ProductCard(image: Image.asset(
