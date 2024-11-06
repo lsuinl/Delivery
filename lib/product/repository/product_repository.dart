@@ -21,11 +21,10 @@ final ProductRepositoryProvider = Provider<ProductRepository>((ref) {
 abstract class ProductRepository<T> implements IBasePaginationRepository<ProductModel>{
   factory ProductRepository(Dio dio, {String baseUrl}) =
       _ProductRepository;
-
   @GET('/')
   @Headers({'accessToken':'true'})
   Future<CursorPagination<ProductModel>> paginate({
-    @Queries() PaginationParams? PaginationParams = const PaginationParams(),
+    @Queries() PaginationParams? paginationParams = const PaginationParams(),
   });
 }
 
