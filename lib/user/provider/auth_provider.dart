@@ -1,9 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:restaurant/common/view/splash_screen.dart';
+import 'package:restaurant/restaurant/view/restaurant_detail_screen.dart';
 import 'package:restaurant/user/provider/user_me_provider.dart';
 
+import '../../common/view/root_tab.dart';
 import '../model/user_model.dart';
+import '../view/login_screen.dart';
 
 final authProvider = ChangeNotifierProvider<AuthProvider>((ref){
   return AuthProvider(ref:ref);
@@ -21,6 +25,28 @@ class AuthProvider extends ChangeNotifier{
       }
     });
 }
+
+List<GoRoute> get routes =>[
+  GoRoute(path:'/',
+    name: RootTab.routeName,
+    builder:(_,__)=> RootTab(),
+    routes: [
+      GoRoute(path:'restaurant/:rid',
+        name: LoginScreen.routeName,
+        builder:(_,state)=> RestaurantDetailScreen(id: state.params['rid']!
+        ),
+      ),
+    ]
+  ),
+  GoRoute(path:'/splash',
+    name: SplashScreen.routeName,
+    builder:(_,__)=> SplashScreen(),
+  ),
+  GoRoute(path:'/login',
+    name: LoginScreen.routeName,
+    builder:(_,__)=> LoginScreen(),
+  ),
+];
 
 //SplashScreen
   //앱을 처음 시작했을 때 토큰 존재여부 확인 후, 로그인 또는 홈 이동하는 로직

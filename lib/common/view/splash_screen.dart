@@ -9,6 +9,7 @@ import 'package:restaurant/common/view/root_tab.dart';
 import 'package:restaurant/user/view/login_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
+  static String get routeName => 'splash';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
