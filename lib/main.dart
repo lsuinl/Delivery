@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant/common/provider/go_router.dart';
-import 'package:restaurant/common/view/root_tab.dart';
-import 'package:restaurant/common/view/splash_screen.dart';
-import 'package:restaurant/user/provider/auth_provider.dart';
-import 'package:restaurant/user/view/login_screen.dart';
-
-import 'common/component/custom_form_field.dart';
-
 
 //test@codefactory.ai
 //testtest
