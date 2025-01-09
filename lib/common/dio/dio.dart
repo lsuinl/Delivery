@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:restaurant/common/const/data.dart';
 import 'package:restaurant/common/secure_storage/secure_storage.dart';
+import 'package:restaurant/user/provider/auth_provider.dart';
 import 'package:riverpod/riverpod.dart';
 
 //dio가 항상 provider을 통해 데이터를 가져옴
@@ -11,7 +13,7 @@ final dioProvider = Provider(( ref) {
   final storage = ref.watch(secureStorageProvider); //하나의 인스턴스의 스토리지(저장소)를 가져옴
 
   dio.interceptors.add(
-    CustomInterceptor(storage: storage),
+    CustomInterceptor(storage: storage, ref:ref),
   );
 
   return dio;
@@ -19,8 +21,11 @@ final dioProvider = Provider(( ref) {
 
 class CustomInterceptor extends Interceptor {
   final FlutterSecureStorage storage;
+  final ProviderRef ref;
 
-  CustomInterceptor({required this.storage});
+  CustomInterceptor({
+    required this.ref,
+    required this.storage});
 
   //1. 요청을 보낼 때
   //요청을 보낼때마다 요청의 헤더에 엑세스토큰이 true인경우 실제 엑세스 토큰을 storage에서 가져와
@@ -105,6 +110,7 @@ class CustomInterceptor extends Interceptor {
 
           return handler.resolve(response);
         } on DioError catch (e) {
+          ref.read(authProvider.notifier).logout();
           return handler.reject(e);
         }
       }
