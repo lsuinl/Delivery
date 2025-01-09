@@ -32,7 +32,7 @@ List<GoRoute> get routes =>[
     builder:(_,__)=> RootTab(),
     routes: [
       GoRoute(path:'restaurant/:rid',
-        name: LoginScreen.routeName,
+        name: RestaurantDetailScreen.routeName,
         builder:(_,state)=> RestaurantDetailScreen(id: state.params['rid']!
         ),
       ),
