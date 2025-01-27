@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:restaurant/user/model/basket_item_model.dart';
+import 'package:restaurant/user/model/patch_basket_body.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../common/const/data.dart';
@@ -23,4 +25,19 @@ abstract class UserMeRepository{
     'accessToken':'true',
   })
   Future<UserModel> getMe();
+
+  @GET('/basket')
+  @Headers({
+    'accessToken':'true',
+  })
+  Future<BasketItemModel> getBasket();
+
+  @PATCH('/basket')
+  @Headers({
+    'accessToken':'true',
+  })
+  Future<BasketItemModel> patchBasket({
+    @Body() required PatchBasketBody body,
+});
+
 }
