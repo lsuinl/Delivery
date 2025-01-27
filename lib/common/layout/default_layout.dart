@@ -5,12 +5,14 @@ class DefaultLayout extends StatelessWidget {
   final Widget child;
   final String? title;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
 
   const DefaultLayout({
     required this.child,
     this.backgroundColor,
     this.title,
     this.bottomNavigationBar,
+    this.floatingActionButton,
     Key? key}) : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class DefaultLayout extends StatelessWidget {
       appBar: renderAppBar(),
     body: child,
       bottomNavigationBar: bottomNavigationBar,//이동(바텀탭)외부에서 받아올거임
+      floatingActionButton: floatingActionButton,
     );
   }
   AppBar? renderAppBar(){
