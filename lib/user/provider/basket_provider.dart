@@ -1,17 +1,35 @@
 import 'package:restaurant/product/model/product_model.dart';
 import 'package:restaurant/rating/component/rating_card.dart';
 import 'package:restaurant/user/model/basket_item_model.dart';
+import 'package:restaurant/user/model/patch_basket_body.dart';
+import 'package:restaurant/user/repository/user_me_repository.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:collection/collection.dart';
 
 final basketProvider = StateNotifierProvider<BasketProvider, List<BasketItemModel>>(
 (ref){
-  return BasketProvider();
+  final repository = ref.watch(userMeRepositoryProvider);
+
+  return BasketProvider(repository: repository);
   }
 );
 
 class BasketProvider extends StateNotifier<List<BasketItemModel>> {
-  BasketProvider() : super([]);
+  final UserMeRepository repository;
+
+  BasketProvider({
+    required this.repository,
+}) : super([]);
+
+  Future<void> patchBasket() async {
+    await repository.patchBasket(body:
+      PatchBasketBody(
+          basket: state.map((e)=>
+          PatchBasketBodyBasket(productId: e.product.id, count: e.count)
+          ).toList()
+      )
+    );
+  }
 
   Future<void> addToBasket({required ProductModel product}) async {
     final exists =
@@ -28,6 +46,8 @@ class BasketProvider extends StateNotifier<List<BasketItemModel>> {
         BasketItemModel(product: product, count:1)
       ];
     }
+
+    await patchBasket();
   }
 
   Future<void> remodeFromBasket({
