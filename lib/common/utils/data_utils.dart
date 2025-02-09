@@ -4,6 +4,10 @@ import '../const/data.dart';
 
 class DataUtils{
   //무조건 static여야함
+  static DateTime stringToDateTime(String value){
+    return DateTime.parse(value);
+  }
+
   static pathToUrl(String value){
     return "http://$ip$value}";
   }
