@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:restaurant/common/const/colors.dart';
 import 'package:restaurant/common/layout/default_layout.dart';
+import 'package:restaurant/order/provider/order_provider.dart';
+import 'package:restaurant/order/view/order_done_screen.dart';
 import 'package:restaurant/product/component/product_card.dart';
 import 'package:restaurant/user/provider/basket_provider.dart';
 
@@ -89,7 +92,17 @@ class BasketScreen extends ConsumerWidget {
                         SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                 final resp = await ref.read(OrderProvider.notifier).postOrder();
+                                 if(resp){
+                                   context.go(OrderDoneScreen.routeName);
+                                 }
+                                 else{
+                                   ScaffoldMessenger.of(context).showSnackBar(
+                                     SnackBar(content: Text('결제실패'))
+                                   );
+                                 }
+                                },
                                 style: ElevatedButton.styleFrom(
                                     foregroundColor: PRIMARY_COLOR),
                                 child: Text('결제하기')))

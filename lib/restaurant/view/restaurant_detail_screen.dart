@@ -10,7 +10,7 @@ import 'package:restaurant/common/provider/go_router.dart';
 import 'package:restaurant/common/utils/pagination_utils.dart';
 import 'package:restaurant/product/component/product_card.dart';
 import 'package:restaurant/product/model/product_model.dart';
-import 'package:restaurant/product/view/basket_screen.dart';
+import 'package:restaurant/restaurant/view/basket_screen.dart';
 import 'package:restaurant/rating/component/rating_card.dart';
 import 'package:restaurant/rating/model/rating_model.dart';
 import 'package:restaurant/restaurant/component/restaurant_card.dart';
