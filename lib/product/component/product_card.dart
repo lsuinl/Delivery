@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant/common/const/colors.dart';
+import 'package:restaurant/product/model/product_model.dart';
 import 'package:restaurant/restaurant/model/restaurant_detail_model.dart';
 import 'package:restaurant/user/provider/basket_provider.dart';
 
@@ -18,19 +19,19 @@ class ProductCard extends ConsumerWidget {
       required this.name,
       required this.detail,
       required this.price,
-        required this.id,
+      required this.id,
       this.onSubtract,
       this.onAdd,
       Key? key})
       : super(key: key);
 
   factory ProductCard.fromProductModel({
-    required RestaurantProductModel model,
+    required ProductModel model,
     VoidCallback? onSubtract,
     VoidCallback? onAdd,
   }) {
     return ProductCard(
-      id:model.id,
+      id: model.id,
       image: Image.asset(
         model.imgUrl,
         width: 110,
@@ -51,7 +52,7 @@ class ProductCard extends ConsumerWidget {
     VoidCallback? onAdd,
   }) {
     return ProductCard(
-        id:model.id,
+        id: model.id,
         image: Image.asset(
           model.imgUrl,
           width: 110,
@@ -61,9 +62,8 @@ class ProductCard extends ConsumerWidget {
         name: model.name,
         detail: model.detail,
         price: model.price,
-      onSubtract: onSubtract,
-      onAdd: onAdd
-    );
+        onSubtract: onSubtract,
+        onAdd: onAdd);
   }
 
   @override
@@ -106,11 +106,18 @@ class ProductCard extends ConsumerWidget {
         ),
       ),
       if (onSubtract != null && onAdd != null)
-        _Footer(
-            total:  (basket.firstWhere((e)=>e.product.id==id).count * basket.firstWhere((e)=>e.product.id==id).product.price).toString(),
-            count: basket.firstWhere((e)=>e.product.id==id).count,
-            onSubtract: onSubtract!,
-            onAdd: onAdd!)
+        Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: _Footer(
+                total: (basket.firstWhere((e) => e.product.id == id).count *
+                        basket
+                            .firstWhere((e) => e.product.id == id)
+                            .product
+                            .price)
+                    .toString(),
+                count: basket.firstWhere((e) => e.product.id == id).count,
+                onSubtract: onSubtract!,
+                onAdd: onAdd!))
     ]);
   }
 }
@@ -140,11 +147,13 @@ class _Footer extends StatelessWidget {
         Row(
           children: [
             renderButton(icon: Icons.remove, onTap: onSubtract),
+            const SizedBox(width: 8,),
             Text(
               count.toString(),
               style:
                   TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.w500),
             ),
+            const SizedBox(width: 8,),
             renderButton(icon: Icons.add, onTap: onAdd),
           ],
         )
