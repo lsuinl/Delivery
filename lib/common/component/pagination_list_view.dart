@@ -82,7 +82,13 @@ class _PaginationListViewState<T extends IModelWithId> extends ConsumerState<Pag
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.separated(
+        child:RefreshIndicator( onRefresh: ()async{
+          ref.read(widget.provider.notifier).paginate(
+            forceRefetch: true
+          );
+        },
+        child:ListView.separated(
+          physics: AlwaysScrollableScrollPhysics(),
           controller: controller,
           itemCount: cp.data.length+1,
           itemBuilder: (_, index) {
@@ -105,6 +111,6 @@ class _PaginationListViewState<T extends IModelWithId> extends ConsumerState<Pag
             return SizedBox(height: 16.0);
           },
         )
-    );
+    ));
   }
 }
