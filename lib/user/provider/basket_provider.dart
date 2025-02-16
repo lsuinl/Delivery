@@ -1,3 +1,4 @@
+import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:restaurant/product/model/product_model.dart';
 import 'package:restaurant/rating/component/rating_card.dart';
 import 'package:restaurant/user/model/basket_item_model.dart';
@@ -16,10 +17,15 @@ final basketProvider = StateNotifierProvider<BasketProvider, List<BasketItemMode
 
 class BasketProvider extends StateNotifier<List<BasketItemModel>> {
   final UserMeRepository repository;
+  final updateBasketDebounce = Debouncer(Duration(seconds: 1), initialValue: null, checkEquality: false);
 
   BasketProvider({
     required this.repository,
-}) : super([]);
+}) : super([]){
+    updateBasketDebounce.values.listen((event){
+      patchBasket();
+    });
+  }
 
   Future<void> patchBasket() async {
     await repository.patchBasket(body:
@@ -47,7 +53,7 @@ class BasketProvider extends StateNotifier<List<BasketItemModel>> {
       ];
     }
 
-    await patchBasket();
+    updateBasketDebounce.setValue(null);
   }
 
   Future<void> remodeFromBasket({
@@ -71,5 +77,7 @@ class BasketProvider extends StateNotifier<List<BasketItemModel>> {
               e.copyWith(count: e.count-1):e
       ).toList();
     }
+    updateBasketDebounce.setValue(null);
   }
+
 }
