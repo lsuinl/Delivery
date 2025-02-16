@@ -9,7 +9,7 @@ import 'package:uuid/uuid.dart';
 
 final OrderProvider =
     StateNotifierProvider<OrderStateNotifier, CursorPaginationBase>((ref) {
-  final repo = ref.watch(OrderRepositoryProvider);
+  final repo = ref.watch(orderRepositoryProvider);
   return OrderStateNotifier(ref: ref, repository: repo);
 });
 
